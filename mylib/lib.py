@@ -24,7 +24,9 @@ def end_spark(spark):
     spark.stop()
     return "stopped spark session"
 
-def extract(url = 'https://raw.githubusercontent.com/footballcsv/england/refs/heads/master/2010s/2019-20/eng.1.csv', file_path="data/matches.csv", directory="data"):
+def extract(url = 'https://raw.githubusercontent.com/footballcsv/england/refs/heads/master/2010s/2019-20/eng.1.csv', 
+            file_path="data/matches.csv", 
+            directory="data"):
     if not os.path.exists(directory):
         os.makedirs(directory)
     if url:
@@ -60,8 +62,10 @@ def describe(df):
 
 def example_transform(df):
     """Transform to extract scores and categorize game result"""
-    df = df.withColumn("Team1_Score", split(col("FT"), "-").getItem(0).cast(IntegerType()))
-    df = df.withColumn("Team2_Score", split(col("FT"), "-").getItem(1).cast(IntegerType()))
+    df = df.withColumn("Team1_Score", split(col("FT"), "-")
+                       .getItem(0).cast(IntegerType()))
+    df = df.withColumn("Team2_Score", split(col("FT"), "-")
+                       .getItem(1).cast(IntegerType()))
     df = df.withColumn("Result", when(col("Team1_Score") > col("Team2_Score"), "Win")
                                   .when(col("Team1_Score") < col("Team2_Score"), "Loss")
                                   .otherwise("Draw"))
