@@ -18,10 +18,15 @@ def main():
     describe(df)
     # Query
     query(
-        spark,
-        df,
-        "SELECT Round, COUNT(*) AS match_count FROM MatchData GROUP BY Round ORDER BY Round",
-        "MatchData",
+    spark,
+    df,
+    """
+    SELECT Round, COUNT(*) AS match_count 
+    FROM MatchData 
+    GROUP BY Round 
+    ORDER BY Round
+    """,
+    "MatchData",
     )
     # transformation
     example_transform(df)
