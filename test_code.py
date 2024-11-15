@@ -10,7 +10,6 @@
 
 from mylib.ETL import extract, transform_and_load,query_transform
 from mylib.Query import spark_sql_query
-import os 
 
 # COMMAND ----------
 
