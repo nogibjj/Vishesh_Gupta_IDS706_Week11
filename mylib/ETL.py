@@ -79,12 +79,12 @@ def put_file_from_url(url, dbfs_path, overwrite, headers):
 
 
 def extract(
-    url="https://raw.githubusercontent.com/footballcsv/england/refs/heads/master/2010s/2019-20/eng.1.csv",
+    url=
+    "https://raw.githubusercontent.com/footballcsv/england/refs/heads/master/2010s/2019-20/eng.1.csv",
     file_path=FILESTORE_PATH+"/match_data_vg157.csv",
     directory=FILESTORE_PATH,
     overwrite=True
 ):
-    """Extract a url to a file path"""
     # Make the directory, no need to check if it exists or not
     mkdirs(path=directory, headers=headers)
     # Add the csv files, no need to check if it exists or not
