@@ -82,3 +82,12 @@ The cluster and libraries ensure that each task has the necessary environment to
 Tasks are set up as independent units but are connected in sequence, with **Transform_and_Load** depending on **Extract**, and **Query** depending on **Transform_and_Load**. This sequential dependency structure ensures that each task only starts once the previous one has successfully completed as seen in the screenshot below
 
 ![screenshot](pipeline2.png)
+
+## References
+
+The following resources were referenced in setting up this workflow:
+
+- [Global Environment Variables on Databricks](https://hypercodelab.com/docs/spark/databricks-platform/global-env-variables)
+- [Databricks FileStore Documentation](https://docs.databricks.com/en/dbfs/filestore.html)
+- [Jeremy Tan IDS706 Week 11 Repository](https://github.com/nogibjj/Jeremy_Tan_IDS706_Week11)
+- Jeremy Tans Office Hourse on 11/15/2024

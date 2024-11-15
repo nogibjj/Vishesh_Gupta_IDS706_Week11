@@ -6,9 +6,8 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # PARTICULAR PURPOSE.
 
 # This program built for i386-apple-darwin11.3.0
- 
 
-# Make data base, printed on Fri Nov 15 15:05:47 2024
+# Make data base, printed on Fri Nov 15 15:23:20 2024
 
 # Variables
 
@@ -66,7 +65,6 @@ MANPATH = /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/share/man:/Lib
 HOME = /Users/visheshgupta
 # default
 MAKEFILEPATH = $(shell /usr/bin/xcode-select -print-path 2>/dev/null || echo /Developer)/Makefiles
- 
 # environment
 VSCODE_CODE_CACHE_PATH = /Users/visheshgupta/Library/Application Support/Code/CachedData/912bb683695358a54ae0c670461738984cbb5b95
 # environment
@@ -125,6 +123,8 @@ XPC_SERVICE_NAME = application.com.microsoft.VSCode.10035415.10035421
 HOMEBREW_PREFIX = /opt/homebrew
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
+# environment
+VSCODE_L10N_BUNDLE_LOCATION = 
 # automatic
 +F = $(notdir $+)
 # environment
@@ -156,7 +156,7 @@ APPLICATIONINSIGHTS_CONFIGURATION_CONTENT = {}
 # environment
 LANG = C
 # variable set hash-table stats:
-# Load=71/1024=7%, Rehash=0, Collisions=3/96=3%
+# Load=72/1024=7%, Rehash=0, Collisions=3/97=3%
 
 # Pattern-specific Variable Values
 
@@ -164,9 +164,9 @@ LANG = C
 
 # Directories
 
-# . (device 16777231, inode 11576988): 20 files, no impossibilities.
+# . (device 16777231, inode 11576988): 25 files, no impossibilities.
 
-# 20 files, no impossibilities in 1 directories.
+# 25 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -200,6 +200,7 @@ format:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
+ 
 #  Last modified 2024-11-15 15:05:34
 #  File has been updated.
 #  Successfully updated.
@@ -276,6 +277,6 @@ install:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Fri Nov 15 15:05:47 2024
+# Finished Make data base on Fri Nov 15 15:23:20 2024
 
  
