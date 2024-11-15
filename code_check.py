@@ -1,10 +1,9 @@
 # Databricks notebook source
-#%python
-#%pip install python-dotenv
+%pip install python-dotenv
 
 # COMMAND ----------
 
-#%restart_python
+# MAGIC %restart_python
 
 # COMMAND ----------
 
