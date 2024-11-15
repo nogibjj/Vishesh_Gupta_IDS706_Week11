@@ -88,6 +88,10 @@ def transform_and_load(dataset="dbfs:/FileStore/mini_project11/match_data_vg157.
     # Load dataset
     match_data_df = spark.read.csv(dataset, header=True, inferSchema=True)
 
+    # Sanitize column names (replace spaces and invalid characters with underscores)
+    sanitized_columns = [col_name.replace(" ", "_").replace("(", "").replace(")", "").replace(".", "_") for col_name in match_data_df.columns]
+    match_data_df = match_data_df.toDF(*sanitized_columns)
+
     # Add a unique ID column
     match_data_df = match_data_df.withColumn("id", monotonically_increasing_id())
 
@@ -125,6 +129,7 @@ def query_transform():
     """
     )
     query_result = spark.sql(query)
+    print(query_result.show())
     return query_result
 
     
