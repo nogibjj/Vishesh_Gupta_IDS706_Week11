@@ -45,19 +45,22 @@ def upload_file_from_url(url, dbfs_path, overwrite):
     if response.status_code == 200:
         content = response.content
         # Create file handle
-        handle = perform_request("/dbfs/create", data={"path": dbfs_path, "overwrite": overwrite})["handle"]
+        handle = perform_request("/dbfs/create", 
+                                 data={"path": dbfs_path, 
+                                       "overwrite": overwrite})["handle"]
         print(f"Uploading file: {dbfs_path}")
         # Add file content in chunks
         for i in range(0, len(content), 2**20):
             perform_request(
                 "/dbfs/add-block",
-                data={"handle": handle, "data": base64.standard_b64encode(content[i:i+2**20]).decode()}
+                data={"handle": handle, 
+                      "data": base64.standard_b64encode(content[i:i+2**20]).decode()}
             )
         # Close the handle
         perform_request("/dbfs/close", data={"handle": handle})
         print(f"File {dbfs_path} uploaded successfully.")
     else:
-        print(f"Failed to download file from {url}. Status code: {response.status_code}")
+        print(f"Failed to download")
 
 def extract(
     source_url="https://raw.githubusercontent.com/footballcsv/england/refs/heads/master/2010s/2019-20/eng.1.csv",
@@ -112,6 +115,8 @@ def query_transform():
         ORDER BY Round
     """
     query_result = spark.sql(query)
-    log_output("query data", query_result.limit(10).toPandas().to_markdown(), query=query)
+    log_output("query data", 
+               query_result.limit(10).toPandas().to_markdown(), 
+               query=query)
     query_result.show()
     return query_result
