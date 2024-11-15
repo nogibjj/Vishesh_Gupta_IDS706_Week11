@@ -90,4 +90,4 @@ The following resources were referenced in setting up this workflow:
 - [Global Environment Variables on Databricks](https://hypercodelab.com/docs/spark/databricks-platform/global-env-variables)
 - [Databricks FileStore Documentation](https://docs.databricks.com/en/dbfs/filestore.html)
 - [Jeremy Tan IDS706 Week 11 Repository](https://github.com/nogibjj/Jeremy_Tan_IDS706_Week11)
-- Jeremy Tans Office Hourse on 11/15/2024
+- Jeremy Tans Office Hours on 11/15/2024
