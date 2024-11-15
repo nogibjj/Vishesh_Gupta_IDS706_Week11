@@ -1,8 +1,4 @@
-import requests
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import col, explode, concat_ws
-from pyspark.sql.types import StringType
-#from data.db_connection import DBConnection
 
 # Initialize the Spark session (optional in Databricks, as Spark is often pre-configured)
 spark = SparkSession.builder.appName("DatabricksDirectQuery").getOrCreate()
