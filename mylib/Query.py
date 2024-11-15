@@ -1,6 +1,5 @@
 from pyspark.sql import SparkSession
 
-# Initialize the Spark session (optional in Databricks, as Spark is often pre-configured)
 spark = SparkSession.builder.appName("DatabricksDirectQuery").getOrCreate()
 
 def spark_sql_query(query):
