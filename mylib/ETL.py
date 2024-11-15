@@ -47,7 +47,7 @@ def upload_file_from_url(url, dbfs_path, overwrite):
         # Create file handle
         handle = perform_request("/dbfs/create", 
                                  data={"path": dbfs_path, 
-                                       "overwrite": overwrite})["handle"]
+                                 "overwrite": overwrite})["handle"]
         print(f"Uploading file: {dbfs_path}")
         # Add file content in chunks
         for i in range(0, len(content), 2**20):
@@ -60,7 +60,7 @@ def upload_file_from_url(url, dbfs_path, overwrite):
         perform_request("/dbfs/close", data={"handle": handle})
         print(f"File {dbfs_path} uploaded successfully.")
     else:
-        print(f"Failed to download")
+        print("Failed to download")
 
 def extract(
     source_url="https://raw.githubusercontent.com/footballcsv/england/refs/heads/master/2010s/2019-20/eng.1.csv",
