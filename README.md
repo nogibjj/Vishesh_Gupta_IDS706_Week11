@@ -1,73 +1,84 @@
-# Vishesh_Gupta_IDS706_Week10
+# Vishesh_Gupta_IDS706_Week11
 
-[![CI](https://github.com/nogibjj/Vishesh_Gupta_IDS706_Week10/actions/workflows/cicd.yml/badge.svg)](https://github.com/nogibjj/Vishesh_Gupta_IDS706_Week10/actions/workflows/cicd.yml)
+[![CI](https://github.com/nogibjj/Vishesh_Gupta_IDS706_Week11/actions/workflows/cicd.yml/badge.svg)](https://github.com/nogibjj/Vishesh_Gupta_IDS706_Week11/actions/workflows/cicd.yml)
 
-## Soccer Match Data Analysis
+# Databricks Setup Guide
 
-This project loads, processes, and analyzes soccer match data for various operations, including loading, describing, querying, and transforming data. The analysis covers team scores, results, and basic statistics from Premier League matches.
+This guide walks you through setting up a new compute cluster in Databricks and connecting an existing Git repository to your workspace.
 
-## Project Overview
+### Setting Up a Cluster
 
-This project performs data operations on a dataset containing English Premier League match results from the 2019-2020 season. Operations include loading and inspecting raw data, generating summaries, querying specific match rounds, and transforming data to extract additional insights like match results for each team.
+![screenshot](Cluster.png)
 
-## Setting Up Spark
+1. **Navigate to the Compute Tab**  
+   In the Databricks workspace, locate and click on the **Compute** section from the sidebar.
 
-You can use one of the following methods to set up Spark:
+2. **Create a New Cluster**  
+   - Click on the **New** button in the sidebar and select **Compute**.
+   - You will be taken to the **Cluster Configuration** page.
 
-1. **Install Spark Locally**: Download and install [Apache Spark](https://spark.apache.org/downloads.html) on your local machine. Ensure that you add Spark to your system PATH to access `spark-submit` and `pyspark` commands.
+3. **Configure Cluster Settings**  
+   - This can be set as the general settings that have been provided to us 
 
-2. **Use GitHub Codespaces**: Codespaces offers a convenient Linux-based development environment that typically includes a pre-installed version of Spark. You can use this to get started without local installation. Professor Gift's Ruff template for Codespaces provides an ideal setup.
+4. **Start the Cluster**  
+   - Click **Create** (or **Start** if the cluster already exists) to initialize the cluster.
 
-## Data Loading
+### Connecting a Git Repository
 
-The dataset contains records of individual soccer matches. Sample data structure:
+![screenshot](Connect_Git.png)
 
-| Round | Date            | Team 1               | FT   | Team 2                     |
-|-------|------------------|----------------------|------|-----------------------------|
-| 1     | Fri Aug 9 2019   | Liverpool FC         | 4-1  | Norwich City FC            |
-| 1     | Sat Aug 10 2019  | West Ham United FC   | 0-5  | Manchester City FC         |
+1. **Navigate to the Workspace Tab**  
+   Go to the **Workspace** section on the left sidebar.
 
-### Operations
-- **Load Data**: Load match data from the source file.
-- **Display Sample**: Display the first few rows to verify loading.
+![screenshot](Connect_Git_1.png)
 
-## Data Description
+2. **Open User Workspace**  
+   - In **Workspace**, expand your user directory.
+   - You should see your existing folders and repositories.
 
-After loading, basic statistics are generated to summarize the dataset.
+3. **Create a Git Folder**  
+   - Click on the **Create** button in the top right corner and select **Git Folder**.
+   - Enter the name of your repository (e.g., `Project_Repo`), url and confirm.
 
-| Summary | Round | Date           | Team 1                     | FT   | Team 2                     |
-|---------|-------|----------------|----------------------------|------|-----------------------------|
-| Count   | 380   | 380            | 380                        | 380  | 380                         |
-| Mean    | 19.5  |                |                            |      |                             |
-| Stddev  | 10.98 |                |                            |      |                             |
-| Min     | 1     | Fri Aug 23 2019| AFC Bournemouth            | 0-0  | AFC Bournemouth             |
-| Max     | 38    | Wed Jun 24 2020| Wolverhampton Wanderers FC | 8-0  | Wolverhampton Wanderers FC  |
+4. **Connect to Git**  
+   - After creating the Git folder, select it, then click **Link Git** or **Set up Git integration**.
+   - Follow the prompts to authenticate and select your repository from GitHub, GitLab, or another Git provider.
+   - Once connected, your code files will sync to Databricks, and you can start working directly in notebooks or scripts.
 
-## Data Querying
+### ETL Process Overview
 
-Specific queries allow extraction of match details, such as querying by match round.
+This project implements an ETL (Extract, Transform, Load) pipeline to process football match data using Python and PySpark. The goal of the ETL process is to retrieve the raw data from an online source, perform necessary transformations, and load the processed data into Delta Lake for analysis.
 
-Example query:
-```sql
-SELECT * FROM MatchData WHERE Round = 1;
-```
+### Summary of Key ETL Steps
 
-| Round | Date            | Team 1               | FT   | Team 2                     |
-|-------|------------------|----------------------|------|-----------------------------|
-| 1     | Fri Aug 9 2019   | Liverpool FC         | 4-1  | Norwich City FC            |
-| 1     | Sat Aug 10 2019  | West Ham United FC   | 0-5  | Manchester City FC         |
+- **Extraction**: Raw data is extracted from an external source and uploaded to DBFS.
+- **Transformation**: Data cleaning, score extraction, and result classification are performed in Spark.
+- **Loading**: The transformed data is stored in Delta Lake as a Delta table, making it accessible for analytical queries.
 
-## Data Transformation
+## Databricks Workflow Setup for Running Code
 
-The transformation step adds columns to the dataset, including:
-- **Team1_Score**: Score for Team 1
-- **Team2_Score**: Score for Team 2
-- **Result**: Outcome for Team 1 (Win, Loss, Draw)
+### Workflow Overview
 
-| Round | Date            | Team 1               | FT   | Team 2                     | Team1_Score | Team2_Score | Result |
-|-------|------------------|----------------------|------|-----------------------------|-------------|-------------|--------|
-| 1     | Fri Aug 9 2019   | Liverpool FC         | 4-1  | Norwich City FC            | 4           | 1           | Win    |
-| 1     | Sat Aug 10 2019  | West Ham United FC   | 0-5  | Manchester City FC         | 0           | 5           | Loss   |
+The workflow consists of three main tasks that follows the summary of KEY ETL STEPS along with querying of data:
+1. **Extract**
+2. **Transform_and_Load**
+3. **Query**
 
-Detailed information can be found in **final_pyspark_output.md** in this repository
+Each task is connected, with outputs from one feeding into the next.
 
+### Dependent Libraries
+
+![screenshot](pipeline.png)
+
+To ensure the tasks run smoothly, the following libraries are specified as dependencies:
+1. **pandas** - For data manipulation.
+2. **databricks-sql-connector** - Allows connection to Databricks SQL.
+3. **python-dotenv** - Manages environment variables.
+
+The cluster and libraries ensure that each task has the necessary environment to execute correctly.
+
+## Task Dependencies
+
+Tasks are set up as independent units but are connected in sequence, with **Transform_and_Load** depending on **Extract**, and **Query** depending on **Transform_and_Load**. This sequential dependency structure ensures that each task only starts once the previous one has successfully completed as seen in the screenshot below
+
+![screenshot](pipeline2.png)

@@ -8,7 +8,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This program built for i386-apple-darwin11.3.0
  
 
-# Make data base, printed on Sat Nov  9 08:53:15 2024
+# Make data base, printed on Fri Nov 15 15:05:47 2024
 
 # Variables
 
@@ -25,7 +25,7 @@ VSCODE_CRASH_REPORTER_PROCESS_TYPE = extensionHost
 # automatic
 @F = $(notdir $@)
 # makefile
-CURDIR := /Users/visheshgupta/Desktop/Vishesh_Gupta_IDS706_Week10
+CURDIR := /Users/visheshgupta/Desktop/Vishesh_Gupta_IDS706_Week11
 # makefile
 SHELL = /bin/sh
 # environment
@@ -33,7 +33,7 @@ VSCODE_NLS_CONFIG = {"userLocale":"en-us","osLocale":"en-us","resolvedLanguage":
 # environment
 _ = /usr/bin/make
 # environment
-VSCODE_PID = 59807
+VSCODE_PID = 72558
 # makefile (from `Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
 # environment
@@ -55,7 +55,7 @@ SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.0hwwsvG10R/Listeners
 # environment
 CONDA_EXE = /opt/miniconda3/bin/conda
 # environment
-PWD = /Users/visheshgupta/Desktop/Vishesh_Gupta_IDS706_Week10
+PWD = /Users/visheshgupta/Desktop/Vishesh_Gupta_IDS706_Week11
 # environment
 HOMEBREW_CELLAR = /opt/homebrew/Cellar
 # environment
@@ -66,6 +66,7 @@ MANPATH = /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/share/man:/Lib
 HOME = /Users/visheshgupta
 # default
 MAKEFILEPATH = $(shell /usr/bin/xcode-select -print-path 2>/dev/null || echo /Developer)/Makefiles
+ 
 # environment
 VSCODE_CODE_CACHE_PATH = /Users/visheshgupta/Library/Application Support/Code/CachedData/912bb683695358a54ae0c670461738984cbb5b95
 # environment
@@ -163,9 +164,9 @@ LANG = C
 
 # Directories
 
-# . (device 16777231, inode 10839035): 18 files, no impossibilities.
+# . (device 16777231, inode 11576988): 20 files, no impossibilities.
 
-# 18 files, no impossibilities in 1 directories.
+# 20 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -181,14 +182,6 @@ all: install lint test format deploy
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/2=0%
-
-container-lint:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  commands to execute (from `Makefile', line 15):
-	docker run --rm -i hadolint/hadolint < Dockerfile
-	
 
 # Not a target:
 .SUFFIXES:
@@ -207,7 +200,7 @@ format:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2024-11-09 08:31:21
+#  Last modified 2024-11-15 15:05:34
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -227,23 +220,6 @@ test:
 #  Modification time never checked.
 #  File has not been updated.
 
-generate_and_push:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  commands to execute (from `Makefile', line 25):
-	# Add, commit, and push the generated files to GitHub
-	@if [ -n "$$(git status --porcelain)" ]; then \
-	git config --local user.email "action@github.com"; \
-	git config --local user.name "GitHub Action"; \
-	git add .; \
-	git commit -m "Add output log"; \
-	git push; \
-	else \
-	echo "No changes to commit. Skipping commit and push."; \
-	fi
-	
-
 lint:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -252,15 +228,8 @@ lint:
 	ruff check *.py mylib/*.py
 	
 
+# Not a target:
 deploy:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  commands to execute (from `Makefile', line 20):
-	#deploy goes here
-	
-
-refactor: format lint
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -290,13 +259,12 @@ install:
 # variable set hash-table stats:
 # Load=8/32=25%, Rehash=0, Collisions=1/10=10%
 #  commands to execute (from `Makefile', line 2):
- 
 	pip install --upgrade pip &&\
 	pip install -r requirements.txt
 	
 
 # files hash-table stats:
-# Load=12/1024=1%, Rehash=0, Collisions=0/33=0%
+# Load=9/1024=1%, Rehash=0, Collisions=0/28=0%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -308,6 +276,6 @@ install:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Sat Nov  9 08:53:15 2024
+# Finished Make data base on Fri Nov 15 15:05:47 2024
 
  
