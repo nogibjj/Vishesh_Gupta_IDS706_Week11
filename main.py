@@ -14,8 +14,7 @@ def main():
     """)
 
 
-    #db_conn.close()
-    spark_sql_query("SELECT * FROM match_data_vg157") #WHERE state_province IS NOT NULL
+    spark_sql_query("SELECT * FROM match_data_vg157")
 
 if __name__ == "__main__":
     main()
