@@ -1,32 +1,20 @@
 # Databricks notebook source
-from mylib.ETL import ETL
+from mylib.ETL import extract, transform_and_load,query_transform
 from mylib.Query import spark_sql_query
+import os 
 
 # COMMAND ----------
 
-etl = ETL()
+extract()
 
 # COMMAND ----------
 
-etl.extract()
+transform_and_load()
 
 # COMMAND ----------
 
-etl.transform()
+query_transform()
 
 # COMMAND ----------
 
-etl.load()
-
-# COMMAND ----------
-
-etl.spark_sql_query("""
-    SELECT Round, COUNT(*) AS match_count 
-    FROM MatchData 
-    GROUP BY Round 
-    ORDER BY Round
-    """)
-
-# COMMAND ----------
-
-spark_sql_query("SELECT * FROM match_data_vg157")
+spark_sql_query(SELECT * FROM match_data_vg157)

@@ -1,20 +1,10 @@
-from mylib.ETL import ETL
+from mylib.ETL import extract, transform_and_load,query_transform
 from mylib.Query import spark_sql_query
-
-def main():
-    etl = ETL()
-    etl.extract()
-    etl.transform()
-    etl.load()
-    etl.spark_sql_query("""
-    SELECT Round, COUNT(*) AS match_count 
-    FROM MatchData 
-    GROUP BY Round 
-    ORDER BY Round
-    """)
-
-
-    spark_sql_query("SELECT * FROM match_data_vg157")
+import os 
 
 if __name__ == "__main__":
-    main()
+    current_directory = os.getcwd()
+    extract()
+    transform_and_load()
+    query_transform()
+    spark_sql_query()
