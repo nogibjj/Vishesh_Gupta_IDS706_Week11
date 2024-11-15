@@ -1,4 +1,12 @@
 # Databricks notebook source
+%pip install python-dotenv
+
+# COMMAND ----------
+
+# MAGIC %restart_python
+
+# COMMAND ----------
+
 from mylib.ETL import extract, transform_and_load,query_transform
 from mylib.Query import spark_sql_query
 import os 
@@ -17,4 +25,4 @@ query_transform()
 
 # COMMAND ----------
 
-spark_sql_query(SELECT * FROM match_data_vg157)
+spark_sql_query("SELECT * FROM match_data_delta")

@@ -15,6 +15,17 @@ FILESTORE_PATH = "dbfs:/FileStore/mini_project11"
 headers = {'Authorization': 'Bearer %s' % access_token}
 url = "https://"+server_h+"/api/2.0"
 
+LOG_FILE = "final_pyspark_output.md"
+
+def log_output(operation, output, query=None):
+    """adds to a markdown file"""
+    with open(LOG_FILE, "a") as file:
+        file.write(f"The operation is {operation}\n\n")
+        if query: 
+            file.write(f"The query is {query}\n\n")
+        file.write("The truncated output is: \n\n")
+        file.write(output)
+        file.write("\n\n")
 
 def perform_query(path, headers, data={}):
     session = requests.Session()
@@ -115,20 +126,22 @@ def transform_and_load(dataset="dbfs:/FileStore/mini_project11/match_data_vg157.
     # Print the number of rows
     num_rows = match_data_df.count()
     print(f"Number of rows in the transformed dataset: {num_rows}")
-
+    log_output("load data", match_data_df.limit(10).toPandas().to_markdown())
     return "Transformation and loading completed successfully."
 
 def query_transform():
-    spark = SparkSession.builder.appName(" Run Query").getOrCreate()
+    spark = SparkSession.builder.appName("Run Query").getOrCreate()
     query = (
         """
-    SELECT Round, COUNT(*) AS match_count 
-    FROM MatchData 
-    GROUP BY Round 
-    ORDER BY Round
-    """
+        SELECT Round, COUNT(*) AS match_count 
+        FROM match_data_delta 
+        GROUP BY Round 
+        ORDER BY Round
+        """
     )
     query_result = spark.sql(query)
+    # Log the query and a truncated version of the result
+    log_output("query data", query_result.toPandas().to_markdown(), query=query)
     print(query_result.show())
     return query_result
 

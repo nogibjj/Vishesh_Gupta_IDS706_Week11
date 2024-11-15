@@ -7,4 +7,4 @@ if __name__ == "__main__":
     extract()
     transform_and_load()
     query_transform()
-    spark_sql_query()
+    spark_sql_query(SELECT * FROM match_data_delta)
