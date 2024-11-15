@@ -1,37 +1,21 @@
-from mylib.lib import (
-    extract,
-    load_data,
-    describe,
-    query,
-    example_transform,
-    start_spark,
-    end_spark,
-)
-
+from mylib.ETL import ETL
+from mylib.Query import spark_sql_query
 
 def main():
-    # Extract
-    extract()
-    spark = start_spark("MatchDataAnalysis")
-    # Load
-    df = load_data(spark)
-    describe(df)
-    # Query
-    query(
-        spark,
-        df,
-        """
+    etl = ETL()
+    etl.extract()
+    etl.transform()
+    etl.load()
+    etl.spark_sql_query("""
     SELECT Round, COUNT(*) AS match_count 
     FROM MatchData 
     GROUP BY Round 
     ORDER BY Round
-    """,
-        "MatchData",
-    )
-    # transformation
-    example_transform(df)
-    end_spark(spark)
+    """)
 
+
+    #db_conn.close()
+    spark_sql_query("SELECT * FROM match_data_vg157") #WHERE state_province IS NOT NULL
 
 if __name__ == "__main__":
     main()

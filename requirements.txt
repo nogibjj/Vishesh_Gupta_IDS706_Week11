@@ -11,4 +11,6 @@ databricks-sql-connector
 databricks
 pyspark
 requests
-tabulate
+pandas
+numpy
+python-dotenv
